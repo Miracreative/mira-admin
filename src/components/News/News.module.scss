@@ -1,0 +1,54 @@
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.newsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.newsTable th,
+.newsTable td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.newsTable th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #333;
+}
+
+.newsTable tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.edit {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .newsTable th,
+    .newsTable td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+.deleteBtn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+        color: red;
+    }
+}
