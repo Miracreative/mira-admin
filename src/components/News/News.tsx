@@ -74,6 +74,7 @@ export const News = () => {
             setRefetch(true);
         }
     };
+    console.log("news", news);
     return (
         <div className={cls.tableContainer}>
             <table className={cls.newsTable}>
@@ -88,35 +89,36 @@ export const News = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {news.map((newsItem, index) => (
-                        <tr key={newsItem._id}>
-                            <td>{index + 1}</td>
-                            <td>{newsItem.title}</td>
-                            <td>{newsItem.subTitle}</td>
-                            <td>{newsItem.authorDetails.name}</td>
-                            <td>
-                                <a href={`news/${newsItem.slug}/edit`}>
-                                    <img
-                                        className={cls.edit}
-                                        src={editIMG}
-                                        width={40}
-                                        height={40}
-                                        alt="edit"
-                                    />
-                                </a>
-                            </td>
-                            <td
-                                className={cls.deleteBtn}
-                                onClick={() =>
-                                    handleDeleteNews(
-                                        newsItem.title,
-                                        newsItem.slug
-                                    )
-                                }>
-                                Удалить
-                            </td>
-                        </tr>
-                    ))}
+                    {news &&
+                        news.map((newsItem, index) => (
+                            <tr key={newsItem._id}>
+                                <td>{index + 1}</td>
+                                <td>{newsItem.title}</td>
+                                <td>{newsItem.subTitle}</td>
+                                <td>{newsItem.authorDetails?.name}</td>
+                                <td>
+                                    <a href={`news/${newsItem.slug}/edit`}>
+                                        <img
+                                            className={cls.edit}
+                                            src={editIMG}
+                                            width={40}
+                                            height={40}
+                                            alt="edit"
+                                        />
+                                    </a>
+                                </td>
+                                <td
+                                    className={cls.deleteBtn}
+                                    onClick={() =>
+                                        handleDeleteNews(
+                                            newsItem.title,
+                                            newsItem.slug
+                                        )
+                                    }>
+                                    Удалить
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </div>
