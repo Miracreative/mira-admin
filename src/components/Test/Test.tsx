@@ -2,13 +2,14 @@ import { useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 import List from "@editorjs/list";
 import Code from "@editorjs/code";
-// @ts-ignore
+//@ts-expect-error adasd
 import Raw from "@editorjs/raw";
 import Header from "@editorjs/header";
 import Quote from "@editorjs/quote";
-// @ts-ignore
+//@ts-expect-error asdas
 import Marker from "@editorjs/marker";
 import Delimiter from "@editorjs/delimiter";
+import ImageTool from "@editorjs/image";
 import { useEffect, useState } from "react";
 import styles from "./Test.module.scss"; // Импортируем стили
 import { useNavigate } from "react-router";
@@ -16,6 +17,7 @@ import { useNavigate } from "react-router";
 type InitialData = {
     authorDetails: AuthorInit;
     categoryDetails: CategoryInit;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     content: any;
     image: string;
     subTitle: string;
@@ -55,7 +57,7 @@ export function Test({
     type: Type;
     slug?: string;
 }) {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [data, setData] = useState(
         initialData && JSON.parse(initialData?.content)
     );
@@ -121,6 +123,15 @@ export function Test({
                 quote: Quote,
                 marker: Marker,
                 delimiter: Delimiter,
+                image: {
+                    class: ImageTool,
+                    config: {
+                        endpoints: {
+                            byFile: "http://localhost:5555/api/upload-image", // Your backend file uploader endpoint
+                            byUrl: "http://localhost:5555/uploads/posts", // Your endpoint that provides uploading by Url
+                        },
+                    },
+                },
             },
             i18n: {
                 messages: {
@@ -140,6 +151,7 @@ export function Test({
                         Bold: "Полужирный",
                         Italic: "Курсив",
                         InlineCode: "Моноширинный",
+                        Image: "Изображение",
                     },
                 },
             },
