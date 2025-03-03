@@ -127,8 +127,12 @@ export function Test({
                     class: ImageTool,
                     config: {
                         endpoints: {
-                            byFile: "http://localhost:5555/api/upload-image", // Your backend file uploader endpoint
-                            byUrl: "http://localhost:5555/uploads/posts", // Your endpoint that provides uploading by Url
+                            byFile: `${
+                                import.meta.env.VITE_PUBLIC_API_PATH
+                            }/api/upload-image`, // Your backend file uploader endpoint
+                            byUrl: `${
+                                import.meta.env.VITE_PUBLIC_API_PATH
+                            }/posts`, // Your endpoint that provides uploading by Url
                         },
                     },
                 },
