@@ -19,7 +19,7 @@ type InitialData = {
     categoryDetails: CategoryInit;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     content: any;
-    image: string;
+    titleImage: string;
     subTitle: string;
     title: string;
     _id: string;
@@ -72,7 +72,7 @@ export function Test({
     );
     const [image, setImage] = useState<File>();
     const [imageName, setImageName] = useState<string | undefined>(
-        initialData?.image
+        initialData?.titleImage
     );
     const [title, setTitle] = useState(initialData?.title || "");
     const [subtitle, setSubtitle] = useState(initialData?.subTitle || "");
@@ -179,7 +179,7 @@ export function Test({
                     formData.append("title", title);
                     formData.append("subtitle", subtitle);
                     formData.append("content", JSON.stringify(outputData));
-                    console.log("formData", formData);
+                    console.log("img", image);
                     if (image) {
                         formData.append("image", image); // Добавляем изображение
                     }
@@ -192,11 +192,16 @@ export function Test({
                             {
                                 method: "POST",
                                 body: formData,
-                                // Отправляем данные как FormData
                             }
-                        ).catch((error) => {
-                            console.error("Error posting data:", error);
-                        });
+                        )
+                            .then(async (res) => {
+                                const data = await res.text();
+                                alert(data);
+                                navigate("/");
+                            })
+                            .catch((error) => {
+                                console.error("Error posting data:", error);
+                            });
                     } else if (type === "editNews") {
                         fetch(
                             `${
@@ -206,16 +211,20 @@ export function Test({
                                 method: "PUT",
                                 body: formData,
                             }
-                        ).catch((error) =>
-                            console.error("Error posting data:", error)
-                        );
+                        )
+                            .then(async (res) => {
+                                const data = await res.text();
+                                alert(data);
+                                navigate("/");
+                            })
+                            .catch((error) =>
+                                console.error("Error posting data:", error)
+                            );
                     }
                 })
                 .catch((error) => {
                     console.log("Saving failed: ", error);
                 });
-
-            navigate("/");
         }
     };
 
@@ -270,16 +279,6 @@ export function Test({
                         required
                     />
                     <p>Картинка новости</p>
-                    {/* <input
-                        ref={imageRef}
-                        accept="image/png, image/jpg, image/jpeg, image/webp"
-                        type="file"
-                        className={styles.formInput}
-                        onChange={(e) => {
-                            setImage(e.target.files ? e.target.files[0] : null);
-                        }}
-                        required
-                    /> */}
                     <input
                         ref={imageRef}
                         type="file"
