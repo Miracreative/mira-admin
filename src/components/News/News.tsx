@@ -54,6 +54,7 @@ export const News = () => {
     useEffect(() => {
         fetchdata();
     }, []);
+
     useEffect(() => {
         if (refetch) {
             fetchdata();
@@ -70,11 +71,10 @@ export const News = () => {
                     method: "DELETE",
                 }
             );
-            console.log("in handle");
             setRefetch(true);
         }
     };
-    console.log("news", news);
+
     return (
         <div className={cls.tableContainer}>
             <table className={cls.newsTable}>
@@ -121,6 +121,9 @@ export const News = () => {
                         ))}
                 </tbody>
             </table>
+            {news.length === 0 && (
+                <h1 style={{ textAlign: "center" }}>Новостей нет</h1>
+            )}
         </div>
     );
 };
