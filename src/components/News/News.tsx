@@ -45,10 +45,11 @@ export const News = () => {
 
     async function fetchdata() {
         const res = await fetch(
-            `${import.meta.env.VITE_PUBLIC_API_PATH}/api/db/posts`
+            `${import.meta.env.VITE_PUBLIC_API_PATH}/api/db/posts?limit=999`
         );
         const data = await res.json();
-        setNews(data);
+        console.log("data", data);
+        setNews(data.posts);
     }
 
     useEffect(() => {
