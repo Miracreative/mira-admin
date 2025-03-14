@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useRef } from "react";
-import EditorJS from "@editorjs/editorjs";
+import EditorJS, { ToolConstructable } from "@editorjs/editorjs";
 import List from "@editorjs/list";
 import Code from "@editorjs/code";
 //@ts-expect-error adasd
@@ -167,7 +167,15 @@ export function EDITOR({
                 ...data,
             },
             tools: {
-                header: Header,
+                header: {
+                    class: Header as unknown as ToolConstructable,
+                    inlineToolbar: true,
+                    config: {
+                        placeholder: "Введите заголовок",
+                        levels: [2, 3],
+                        defaultLevel: 2,
+                    },
+                },
                 list: List,
                 code: Code,
                 raw: Raw,
@@ -190,6 +198,24 @@ export function EDITOR({
             },
             i18n: {
                 messages: {
+                    ui: {
+                        blockTunes: {
+                            toggler: {
+                                "Click to tune": "Нажмите, чтобы настроить",
+                                "or drag to move": "или перетащите",
+                            },
+                        },
+                        inlineToolbar: {
+                            converter: {
+                                "Convert to": "Конвертировать в",
+                            },
+                        },
+                        toolbar: {
+                            toolbox: {
+                                Add: "Добавить",
+                            },
+                        },
+                    },
                     toolNames: {
                         Text: "Параграф",
                         Heading: "Заголовок",
@@ -207,6 +233,12 @@ export function EDITOR({
                         Italic: "Курсив",
                         InlineCode: "Моноширинный",
                         Image: "Изображение",
+                    },
+                    tools: {
+                        header: {
+                            "Heading 2": "Заголовок H2",
+                            "Heading 3": "Заголовок H3",
+                        },
                     },
                 },
             },
@@ -346,7 +378,7 @@ export function EDITOR({
                             ? `Выбранный файл: ${imageName}`
                             : "Файл не выбран"}
                     </span>
-                    <p>Текст новости</p>
+                    <p>Текст новости</p>{" "}
                     <div
                         style={{ backgroundColor: "#f0efef" }}
                         id="editorjs"></div>

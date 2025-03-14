@@ -67,3 +67,18 @@
     display: flex;
     gap: 10px;
 }
+
+.clue {
+    // position: absolute;
+    // top: 75vh;
+    // right: 3%;
+    background-color: rgb(233, 233, 233);
+    border-radius: 16px;
+    padding: 15px;
+    width: 300px;
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
