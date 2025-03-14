@@ -1,6 +1,6 @@
 /* Home.module.css */
 .formContainer {
-    max-width: 600px;
+    max-width: 890px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -62,4 +62,8 @@
     margin-top: 10px;
     font-size: 14px;
     color: #333;
+}
+.btnList {
+    display: flex;
+    gap: 10px;
 }

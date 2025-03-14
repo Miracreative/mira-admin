@@ -6,6 +6,7 @@ import { useAuth } from "../../providers/AuthProvider";
 import { Home } from "../../pages/Home";
 import { AddPostPage } from "../../pages/AddPostPage";
 import { EditPostPage } from "../../pages/EditPostPage";
+import { DraftPostsPage } from "../../pages/DraftPostsPage";
 
 export const Router = () => {
     const { isAuth } = useAuth();
@@ -33,6 +34,14 @@ export const Router = () => {
                 element={
                     <ProtectedRoute redirectPath="/login" isAuth={isAuth}>
                         <EditPostPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/draft"
+                element={
+                    <ProtectedRoute redirectPath="/login" isAuth={isAuth}>
+                        <DraftPostsPage />
                     </ProtectedRoute>
                 }
             />

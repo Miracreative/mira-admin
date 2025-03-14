@@ -84,3 +84,12 @@ html {
 	font: inherit;
 	letter-spacing: inherit;
   }
+  
+ 
+  .ce-block__content,
+  .ce-toolbar__content {
+	  max-width: 850px;
+  }
+  .ce-paragraph {
+	font-size: 24px;
+  }
