@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import cls from "./News.module.scss";
-import editIMG from "../../assets/edit-button.svg";
+import { NewsTable } from "../NewsTable/NewsTable";
 
 type Author = {
     _id: string;
@@ -28,7 +27,7 @@ type Content = {
     version: string;
 };
 
-type Post = {
+export type Post = {
     _id: string;
     title: string;
     subTitle: string;
@@ -51,7 +50,6 @@ export const News = () => {
         console.log("data", data);
         setNews(data.posts);
     }
-
     useEffect(() => {
         fetchdata();
     }, []);
@@ -66,65 +64,41 @@ export const News = () => {
     const handleDeleteNews = async (title: string, slug: string) => {
         const isConfirmed = confirm(`Точно удалить пост ${title}?`);
         if (isConfirmed) {
-            await fetch(
+            const res = await fetch(
                 `${import.meta.env.VITE_PUBLIC_API_PATH}/api/db/posts/${slug}`,
                 {
                     method: "DELETE",
                 }
             );
+            const textFromServer = await res.text();
+            alert(textFromServer);
+            setRefetch(true);
+        }
+    };
+    const handleAddToDraftNews = async (title: string, slug: string) => {
+        const isConfirmed = confirm(
+            `Точно добавить пост ${title} в черновики?`
+        );
+        if (isConfirmed) {
+            const res = await fetch(
+                `${
+                    import.meta.env.VITE_PUBLIC_API_PATH
+                }/api/db/posts/${slug}/draft`,
+                {
+                    method: "POST",
+                }
+            );
+            const textFromServer = await res.text();
+            alert(textFromServer);
             setRefetch(true);
         }
     };
 
     return (
-        <div className={cls.tableContainer}>
-            <table className={cls.newsTable}>
-                <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>Заголовок</th>
-                        <th>Подзаголовок</th>
-                        <th>Автор</th>
-                        <th>Редактировать</th>
-                        <th className={cls.remove}>Удалить</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {news &&
-                        news.map((newsItem, index) => (
-                            <tr key={newsItem._id}>
-                                <td>{index + 1}</td>
-                                <td>{newsItem.title}</td>
-                                <td>{newsItem.subTitle}</td>
-                                <td>{newsItem.authorDetails?.name}</td>
-                                <td>
-                                    <a href={`news/${newsItem.slug}/edit`}>
-                                        <img
-                                            className={cls.edit}
-                                            src={editIMG}
-                                            width={40}
-                                            height={40}
-                                            alt="edit"
-                                        />
-                                    </a>
-                                </td>
-                                <td
-                                    className={cls.deleteBtn}
-                                    onClick={() =>
-                                        handleDeleteNews(
-                                            newsItem.title,
-                                            newsItem.slug
-                                        )
-                                    }>
-                                    Удалить
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
-            {news.length === 0 && (
-                <h1 style={{ textAlign: "center" }}>Новостей нет</h1>
-            )}
-        </div>
+        <NewsTable
+            news={news}
+            handleDeleteNews={handleDeleteNews}
+            handleAddToDraftNews={handleAddToDraftNews}
+        />
     );
 };

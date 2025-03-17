@@ -1,11 +1,11 @@
 import { Header } from "../components/Header/Header";
-import { Test } from "../components/Test/Test";
+import { EDITOR } from "../components/Editor/Editor";
 
 export function AddPostPage() {
     return (
         <>
             <Header />
-            <Test type="addNews" />
+            <EDITOR isDraft={false} editorType="add" />
         </>
     );
 }

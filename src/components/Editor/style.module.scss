@@ -1,6 +1,6 @@
 /* Home.module.css */
 .formContainer {
-    max-width: 600px;
+    max-width: 890px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -62,4 +62,23 @@
     margin-top: 10px;
     font-size: 14px;
     color: #333;
+}
+.btnList {
+    display: flex;
+    gap: 10px;
+}
+
+.clue {
+    // position: absolute;
+    // top: 75vh;
+    // right: 3%;
+    background-color: rgb(233, 233, 233);
+    border-radius: 16px;
+    padding: 15px;
+    width: 300px;
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
 }

@@ -3,8 +3,18 @@
 	text-align: center;
 }
 
+
+@font-face {
+	font-family: "TTCommons";
+	src: url("../src/fonts/TTCommons-Regular.woff2") format("woff2");
+}
+
+
+
 html {
-	font-style: 16px;
+	font-style: normal;
+	font-size: 16px;  
+	font-family: "TTCommons", sans-serif;
 }
 
 body {
@@ -46,6 +56,10 @@ body {
 .editor-container > * {
 	text-align: left;
 }
+.ce-block__content,
+.ce-toolbar__content {
+	max-width: 850px;
+}
 
 html {
 	box-sizing: border-box;
@@ -58,8 +72,10 @@ html {
   }
   
   ul,
-  ol {
+  ol,
+  p {
 	padding: 0;
+	margin-bottom: 5px;
   }
 
   
@@ -83,4 +99,21 @@ html {
   select {
 	font: inherit;
 	letter-spacing: inherit;
+  }
+  
+ 
+
+
+  h2 {
+	font-size: 40px;
+	font-weight: 400;
+  }
+
+  h3 {
+	font-size: 32px;
+	font-weight: 400;
+  }
+
+  .ce-paragraph {
+	font-size: 24px;
   }
